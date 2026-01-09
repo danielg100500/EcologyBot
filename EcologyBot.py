@@ -2,14 +2,18 @@ import os
 import telebot
 import requests
 import random
+from dotenv import load_dotenv
 
-bot = telebot.TeleBot("8565732472:AAEJo8ytHivnZFkDR-Daqeqe8bbfexeaoOU")
+load_dotenv()
+api_token = os.getenv("MY_API_TOKEN")
+
+bot = telebot.TeleBot(api_token)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.reply_to(message, "Привет! Я Telegram бот, созданный для сохранения природы. Чтобы узнать, что я умею, напиши /info")
 
-@bot.message_handler(commands=['info'])
+@bot.message_handler(commands=['info', 'help'])
 def send_info(message):
     bot.reply_to(message, "/clean_use, /bottles, /posters")
 
